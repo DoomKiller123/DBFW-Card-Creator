@@ -121,6 +121,7 @@
       background-color: rgba(0,0,0,0.5);
       padding: 8px;
       border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
     #displayEffect2 {
       display: none;
@@ -203,10 +204,11 @@
       <input type="text" id="combo" placeholder="e.g. +10000">
 
       <label>Effect 1:</label>
-      <textarea id="effect1" placeholder="Enter effect here"></textarea>
-
+      <textarea id="effect1" placeholder="Enter effect here" list="effectKeywords"></textarea>
+      
       <label>Effect 2:</label>
-      <textarea id="effect2" placeholder="Enter second effect here"></textarea>
+      <textarea id="effect2" placeholder="Enter second effect here" list="effectKeywords"></textarea>
+
 
       <datalist id="effectKeywords">
         <option value="On Play:">
@@ -238,10 +240,10 @@
         <div class="text power" id="displayPower">10000</div>
         <div class="text card-name" id="displayCardName">Frieza</div>
         <div class="effect-container">
-        <div class="text effect" id="displayEffect">Choose up to 1 of your opponent’s Battle Cards and switch it to Rest Mode.</div>
-        <div class="text effect" id="displayEffect2"></div>
+          <div class="text effect" id="displayEffect">Choose up to 1 of your opponent’s Battle Cards and switch it to Rest Mode.</div>
+          <div class="text effect" id="displayEffect2"></div>
+        </div>
         <div class="text traits" id="displayTraits">Frieza Clan / Frieza's Army</div>
-      </div>
       <button id="downloadBtn">Download Card as Image</button>
     </div>
   </div>
