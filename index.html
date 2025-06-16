@@ -205,7 +205,7 @@
       <label>Art Style:</label>
       <select id="artStyle" onchange="updateArtStyle()">
         <option value="full">Full Art</option>
-        <option value="regular">Regular Art</option>
+        <option value="regular" selected>Regular Art</option>
       </select>
     </div>
 
@@ -308,6 +308,12 @@
     document.getElementById("downloadBtn").addEventListener("click", function () {
       const fileName = prompt("Enter a name for your card image:", "trading_card");
       if (!fileName) return;
+
+    // Initialize the card style to match default select value
+    window.addEventListener("DOMContentLoaded", () => {
+      updateArtStyle();
+    });
+
 
       html2canvas(document.getElementById("card")).then(function (canvas) {
         const link = document.createElement("a");
