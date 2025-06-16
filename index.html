@@ -97,7 +97,12 @@
       background-color: rgba(0,0,0,0.5);
       padding: 8px;
       border-radius: 6px;
+      margin-bottom: 3px;
     }
+    #displayEffect2 {
+      display: none;
+    }
+
 
     .card-name {
       position: absolute;
@@ -171,19 +176,28 @@
       <label>Combo Power:</label>
       <input type="text" id="combo" placeholder="e.g. +10000">
 
-      <label>Effect:</label>
-      <textarea id="effect" placeholder="Enter effect here"></textarea>
+      <label>Effect 1:</label>
+      <textarea id="effect1" placeholder="Enter effect here"></textarea>
+
+      <label>Effect 2:</label>
+      <textarea id="effect2" placeholder="Enter second effect here"></textarea>
 
       <label>Traits:</label>
       <input type="text" id="traits" placeholder="e.g. Frieza Clan / Frieza's Army">
 
       <label>Card Art (Image Upload):</label>
       <input type="file" id="imageUpload" accept="image/*">
+      <label>Art Style:</label>
+      <select id="artStyle" onchange="updateArtStyle()">
+        <option value="full">Full Art (template on top)</option>
+        <option value="regular">Regular Art (template below)</option>
+      </select>
     </div>
 
-    <div class="card-preview">
-    <div id="card" class="card" style="background-image: url('fusion-worlds-reveals-v0-upkrzxi42a2c1.jpg');">
-        <img id="cardImage" src="https://via.placeholder.com/300x500" alt="Card Art">
+        <div class="card-preview">
+        <div id="card" class="card">
+          <img id="cardImage" src="https://via.placeholder.com/300x500" alt="Card Art">
+          <img id="cardTemplate" src="fusion-worlds-reveals-v0-upkrzxi42a2c1.jpg" alt="Template" style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
         <div class="text cost" id="displayCost">1</div>
         <div class="text combo" id="displayCombo">+10000</div>
         <div class="text power" id="displayPower">10000</div>
@@ -196,6 +210,20 @@
   </div>
 
   <script>
+  function updateArtStyle() {
+    const style = document.getElementById("artStyle").value;
+    const template = document.getElementById("cardTemplate");
+    const image = document.getElementById("cardImage");
+  
+    if (style === "regular") {
+      template.style.zIndex = 0; // Below art
+      image.style.zIndex = 1;    // On top of template
+    } else {
+      template.style.zIndex = 2; // On top of art
+      image.style.zIndex = 1;    // Below template
+    }
+  }
+
   function updateCardColor() {
       const color = document.getElementById("cardColor").value;
 
@@ -230,8 +258,20 @@
       document.getElementById("displayCombo").textContent = this.value;
     });
 
-    document.getElementById("effect").addEventListener("input", function () {
+    document.getElementById("effect1").addEventListener("input", function () {
       document.getElementById("displayEffect").textContent = this.value;
+    });
+    
+    document.getElementById("effect2").addEventListener("input", function () {
+      const text = this.value;
+      const display = document.getElementById("displayEffect2");
+    
+      if (text.trim() === "") {
+        display.style.display = "none";
+      } else {
+        display.textContent = text;
+        display.style.display = "block";
+      }
     });
 
     document.getElementById("traits").addEventListener("input", function () {
