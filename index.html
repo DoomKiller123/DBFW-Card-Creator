@@ -60,9 +60,24 @@
     }
     
     .card img {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    #cardImage {
+      z-index: 0;
+    }
+    
+    #cardTemplate {
+      z-index: 1;
+    }
+    
+    .card .text {
+      z-index: 2;
     }
 
 
@@ -189,8 +204,8 @@
       <input type="file" id="imageUpload" accept="image/*">
       <label>Art Style:</label>
       <select id="artStyle" onchange="updateArtStyle()">
-        <option value="full">Full Art (template on top)</option>
-        <option value="regular">Regular Art (template below)</option>
+        <option value="full">Full Art</option>
+        <option value="regular">Regular Art</option>
       </select>
     </div>
 
@@ -216,11 +231,11 @@
     const image = document.getElementById("cardImage");
   
     if (style === "regular") {
-      template.style.zIndex = 0; // Below art
-      image.style.zIndex = 1;    // On top of template
+      template.style.zIndex = 1; // Template over image
+      image.style.zIndex = 0;
     } else {
-      template.style.zIndex = 2; // On top of art
-      image.style.zIndex = 1;    // Below template
+      template.style.zIndex = 0; // Template under image
+      image.style.zIndex = 1;
     }
   }
 
